@@ -5,7 +5,7 @@ def tally_chars_in_msg(str_msg)
     if hsh_tally.has_key?(c)
       hsh_tally[c] += 1
     else
-      unless c.match(" ")
+      unless c.match(" ") or c.match(/[[:punct:]]/)
         hsh_tally[c] = 1
       end
     end
