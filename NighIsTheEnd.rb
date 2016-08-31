@@ -5,7 +5,9 @@ def tally_chars_in_msg(str_msg)
     if hsh_tally.has_key?(c)
       hsh_tally[c] += 1
     else
-      hsh_tally[c] = 1
+      unless c.match(" ")
+        hsh_tally[c] = 1
+      end
     end
   }
   return hsh_tally
