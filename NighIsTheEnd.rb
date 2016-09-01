@@ -18,6 +18,7 @@ str_msg = gets.chomp
 if !str_msg.instance_of? String
   abort("Somehow, you fed a non-string to this script.")
 end
+str_msg = str_msg.strip
 if str_msg.length === 0
   abort("You didn't write anything.")
 end
