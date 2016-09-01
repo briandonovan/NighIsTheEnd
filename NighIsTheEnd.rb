@@ -1,4 +1,6 @@
 
+require 'colorize'
+
 $str_nlnsp = "\n  "
 
 def rtn_hsh_tally_chars_in_msg(str_msg)
@@ -18,7 +20,7 @@ end
 def rtn_str_char_occur_list_printable(arr_hsh_tally_sorted)
   str_printable_list = ''
   for arr_char_tally in arr_hsh_tally_sorted
-    str_printable_list += $str_nlnsp + "#{arr_char_tally[0]}: #{arr_char_tally[1]}"
+    str_printable_list += $str_nlnsp + "#{arr_char_tally[0].to_s.cyan}: #{arr_char_tally[1].to_s.yellow}"
   end
   str_printable_list += "\n"
   return str_printable_list
@@ -38,24 +40,20 @@ end
 
 hsh_tally = rtn_hsh_tally_chars_in_msg(str_msg)
 arr_hsh_tally_sorted = hsh_tally.sort_by{ |k,v| v}.reverse
-#puts "arr_hsh_tally_sorted class: #{arr_hsh_tally_sorted.class}"
-#puts "arr_hsh_tally_sorted: #{arr_hsh_tally_sorted.to_s}"
 arr_vals_hsh_tally = hsh_tally.values.sort.reverse
-#puts "arr_vals_hsh_tally class: #{arr_vals_hsh_tally.class}"
-#puts "arr_vals_hsh_tally: #{arr_vals_hsh_tally.to_s}"
 
 fxnm_highest_occurrence = arr_vals_hsh_tally[0]
 fxnm_num_chars_highest_occur = arr_vals_hsh_tally.count(fxnm_highest_occurrence)
 
-puts $str_nlnsp + "That message included #{hsh_tally.keys.length} different characters."
+puts $str_nlnsp + "That message included #{hsh_tally.keys.length.to_s.yellow} different characters."
 
 if fxnm_highest_occurrence == 1
   puts $str_nlnsp + "No character occurs more than once."
 elsif fxnm_num_chars_highest_occur == 1
-  puts $str_nlnsp + "The character #{arr_hsh_tally_sorted[0][0]} was most common, present #{arr_hsh_tally_sorted[0][1].to_s} times."
+  puts $str_nlnsp + "The character #{arr_hsh_tally_sorted[0][0].cyan} was most common, present #{arr_hsh_tally_sorted[0][1].to_s.yellow} times."
 else
-  str_highest_occur_chars = arr_hsh_tally_sorted[0, fxnm_num_chars_highest_occur].map { |k| "#{k[0]}" }.join(" ")
-  puts $str_nlnsp + "#{fxnm_num_chars_highest_occur.to_s} characters (#{str_highest_occur_chars}) were each present #{fxnm_highest_occurrence.to_s} times."
+  str_highest_occur_chars = arr_hsh_tally_sorted[0, fxnm_num_chars_highest_occur].map { |k| "#{k[0].to_s.cyan}" }.join(" ")
+  puts $str_nlnsp + "#{fxnm_num_chars_highest_occur.to_s} characters (#{str_highest_occur_chars}) were each present #{fxnm_highest_occurrence.to_s.yellow} times."
 end
 
 str_printable_char_occur_list = rtn_str_char_occur_list_printable(arr_hsh_tally_sorted)
